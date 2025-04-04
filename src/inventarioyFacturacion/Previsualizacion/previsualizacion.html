@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previsualización de la Factura</title>
+  <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link rel="stylesheet" href="previsualizacion.css">
+</head>
+<body>
+  <div class="factura-container">
+    <h1>Previsualización de los datos de la Factura</h1>
+    <div class="factura-header">
+      <p><strong>Número de Factura: No.</strong> <span id="previewNumeroFactura"></span></p>
+      <p><strong>Fecha de Emisión:</strong> <span id="previewFechaEmision"></span></p>
+      <p><strong>Fecha de Vencimiento:</strong> <span id="previewFechaLimite"></span></p>
+      <p><strong>Cliente:</strong> <span id="previewCliente"></span></p>
+      <p><strong>RTN Cliente:</strong> <span id="previewRtnCliente"></span></p>
+      <p><strong>Direccion Cliente:</strong> <span id="previewDirCliente"></span></p>
+      <p><strong>Correo Cliente:</strong> <span id="previewCorreoCliente"></span></p>
+      <p><strong>CAI:</strong> <span id="previewCai"></span></p>
+      <p><strong>N° de orden de Compra exenta:</strong> <span id="previewNcompraExenta"></span></p>
+      <p><strong>N° de registro del SAG:</strong> <span id="previewNregistroSag"></span></p>
+      <p><strong>N° de constancia de resgistro exonerado:</strong> <span id="previewNregistroExonerado"></span></p>
+      <p><strong>Tipo de Moneda:</strong> <span id="previewmoneda"></span></p>
+    </div>
+
+    <table class="factura-table">
+      <thead>
+        <tr>
+          <th>Numero de Paca</th>
+          <th>Clase</th>
+          <th>Peso Bruto</th>
+          <th>Peso Neto</th>
+          <th>Precio Unitario</th>
+          <th>Descuento</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="previewItemsFactura">
+        <!-- Los ítems de la factura se cargarán aquí dinámicamente -->
+      </tbody>
+    </table>
+
+    <div class="factura-totales">
+      <p><strong>Importe Exonerado:</strong> <span id="previewImporteExonerado"></span></p>
+      <p><strong>Importe Exento:</strong> <span id="previewImporteExento"></span></p>
+      <p><strong>Importe Gravado 15%:</strong> <span id="previewImporteGravado15"></span></p>
+      <p><strong>Importe Gravado 18%:</strong> <span id="previewImporteGravado18"></span></p>
+      <p><strong>ISV 15%:</strong> <span id="previewIsv15"></span></p>
+      <p><strong>ISV 18%:</strong> <span id="previewIsv18"></span></p>
+      <p><strong>Total Factura:</strong> <span id="previewTotal"></span></p>
+    </div>
+
+    <div class="factura-actions">
+      <button id="confirmarFacturaBtn">Confirmar Datos</button>
+      <button id="cancelarFacturaBtn">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <script src="previsualizacion.js"></script>
+</body>
+</html>

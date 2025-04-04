@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencia</title>
+    <link rel="stylesheet" href="registroAsistencia.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <img src="../../../src/Bodega1/img/Sabor-del-mundo-Tabacos.ico" alt="Logo">
+            <h1>Sistema de Asistencias</h1>
+        </div>
+        <div class="nav-user">
+            <span id="username-display"></span>
+            <button onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="../dashboard.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="./registroAsistencia.html">
+                    <i class="fas fa-fingerprint"></i>
+                    <span>Registro</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/asistencias/resumen.html">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Resumen</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/empleados/historial.html">
+                    <i class="fas fa-history"></i>
+                    <span>Historial</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/empleados/permisos.html">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Permisos</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-fingerprint"></i> Control de Asistencia</h1>
+            <div class="date-display" id="currentDate"></div>
+        </header>
+
+        <main>
+            <section class="card" id="registroSection">
+                <h2>Registro de Asistencia</h2>
+                <div class="form-group">
+                    <label for="empleadoId">ID de Empleado:</label>
+                    <input type="text" id="empleadoId" placeholder="Ingrese ID de empleado">
+                </div>
+                <div class="form-group">
+                    <label for="registroFecha">Fecha de registro:</label>
+                    <input type="date" id="registroFecha">
+                </div>
+                <div class="form-group">
+                    <label for="registroHora">Hora de registro (opcional):</label>
+                    <input type="time" id="registroHora" placeholder="Dejar vacío para hora actual">
+                </div>
+                <div class="button-group">
+                    <button id="registrarEntradaBtn" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span id="entradaBtnText">Registrar Entrada</span>
+                        <div class="spinner" id="entradaSpinner"></div>
+                    </button>
+                    <button id="registrarSalidaBtn" class="btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span id="salidaBtnText">Registrar Salida</span>
+                        <div class="spinner" id="salidaSpinner"></div>
+                    </button>
+                </div>
+                <div id="registroResult" class="result-message"></div>
+            </section>
+
+            <div class="card" id="cierreSection">
+                <h2>Cierre de Jornada</h2>
+                <div class="form-group">
+                    <label for="cierreFecha">Fecha:</label>
+                    <input type="date" id="cierreFecha">
+                </div>
+                <div class="form-group">
+                    <label for="cierreHora">Hora de cierre:</label>
+                    <input type="time" id="cierreHora" value="16:00">
+                </div>
+                <button id="cerrarJornadaBtn" class="btn-warning">
+                    <i class="fas fa-lock"></i>
+                    <span id="cerrarBtnText">Cerrar Jornada</span>
+                    <div class="spinner" id="cerrarSpinner"></div>
+                </button>
+                <div id="cierreResult" class="result-message"></div>
+            </div>
+
+            <section class="card">
+                <h2>Buscar Asistencias</h2>
+                <div class="search-options">
+                    <div class="form-group">
+                        <label for="searchType">Tipo de búsqueda:</label>
+                        <select id="searchType">
+                            <option value="fecha">Por Fecha</option>
+                            <option value="empleado">Por Empleado</option>
+                            <option value="resumen">Resumen Diario</option>
+                        </select>
+                    </div>
+
+                    <div id="fechaSearch" class="search-group">
+                        <div class="form-group">
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" id="fecha">
+                        </div>
+                    </div>
+
+                    <div id="empleadoSearch" class="search-group" style="display: none;">
+                        <div class="form-group">
+                            <label for="empleadoSearchId">ID Empleado:</label>
+                            <input type="text" id="empleadoSearchId">
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha Inicio:</label>
+                            <input type="date" id="fechaInicio">
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha Fin:</label>
+                            <input type="date" id="fechaFin">
+                        </div>
+                    </div>
+
+                    <div id="resumenSearch" class="search-group" style="display: none;">
+                        <div class="form-group">
+                            <label for="resumenFecha">Fecha:</label>
+                            <input type="date" id="resumenFecha">
+                        </div>
+                    </div>
+
+                    <button id="buscarBtn" class="btn-info">
+                        <i class="fas fa-search"></i>
+                        <span>Buscar</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="card" id="resultsSection">
+                <h2>Resultados</h2>
+                <div id="loadingResults" class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando datos...</p>
+                </div>
+                <div id="resultsContainer"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="registroAsistencia.js"></script>
+</body>
+</html>

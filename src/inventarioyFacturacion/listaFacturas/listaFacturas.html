@@ -1,0 +1,34 @@
+<!-- archivo: index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Facturas</title>
+    <link rel="stylesheet" href="listaFacturas.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Histórico de Facturas</h1>
+        <button id="btnVolver" class="btn">Volver</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número de Factura</th>
+                    <th>Fecha de Emisión</th>
+                    <th>Cliente</th>
+                    <th>Total a Pagar</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody id="facturasBody">
+                <!-- Facturas se insertarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="listaFacturas.js"></script>
+</body>
+</html>

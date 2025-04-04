@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Paca</title>
+  <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="crearPaca.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li class="logout-button">
+        <button onclick="logout()">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Agregar Paca</h1>
+    <form id="pilonForm">
+      <label for="numeroPilon">Número de Paca:</label>
+      <input type="text" id="numeroPilon" required />
+      
+      <label for="corte">tipo:</label>
+      <select id="tipo" name="tipo">
+        <option value="">-- Seleccione --</option> 
+        <option value="Tripa despalillado seco grande A">Tripa despalillado seco grande A</option>
+        <option value="Tripa despalillado seco mediano A">Tripa despalillado seco mediano A</option>
+        <option value="Tripa despalillado seco pequeno A">Tripa despalillado seco pequeno A</option>
+        <option value="Tripa despalillado viso grande A">Tripa despalillado viso grande A</option>
+        <option value="Tripa despalillado viso mediano A">Tripa despalillado viso mediano A</option>
+        <option value="Tripa despalillado viso pequeño A">Tripa despalillado viso pequeño A</option>
+        <option value="Tripa despalillado ligero grande A">Tripa despalillado ligero grande A</option>
+        <option value="Tripa despalillado ligero mediano A">Tripa despalillado ligero mediano A</option>
+        <option value="Tripa despalillado ligero pequeño A">Tripa despalillado ligero pequeño A</option>
+        <option value="Tripa despalillado seco grande B">Tripa despalillado seco grande B</option>
+        <option value="Tripa despalillado seco mediano B">Tripa despalillado seco mediano B</option>
+        <option value="Tripa despalillado seco pequeno B">Tripa despalillado seco pequeno B</option>
+        <option value="Tripa despalillado viso grande B">Tripa despalillado viso grande B</option>
+        <option value="Tripa despalillado viso mediano B">Tripa despalillado viso mediano B</option>
+        <option value="Tripa despalillado viso pequeño B">Tripa despalillado viso pequeño B</option>
+        <option value="Tripa despalillado ligero grande B">Tripa despalillado ligero grande B</option>
+        <option value="Tripa despalillado ligero mediano B">Tripa despalillado ligero mediano B</option>
+        <option value="Tripa despalillado ligero pequeño B">Tripa despalillado ligero pequeño B</option>
+
+        <option value="Capa Seco Grande">Capa Seco Grande</option>
+        <option value="Capa Seco Mediano">Capa Seco Mediano</option>
+        <option value="Capa Seco Pequeño">Capa Seco Pequeño</option>
+        <option value="Capa Viso Grande">Capa Viso Grande</option>
+        <option value="Capa Viso Mediano">Capa Viso Mediano</option>
+        <option value="Capa Viso Pequeño">Capa Viso Pequeño</option>
+        <option value="Capa XL Seco Grande">Capa XL Seco Grande</option>
+        <option value="Capa XL Seco Mediano">Capa XL Seco Mediano</option>
+        <option value="Capa XL Seco Pequeño">Capa XL Seco Pequeño</option>
+        <option value="Capa XL Viso Grande">Capa XL Viso Grande</option>
+        <option value="Capa XL Viso Mediano">Capa XL Viso Mediano</option>
+        <option value="Capa XL Viso Pequeño">Capa XL Viso Pequeño</option>
+        <option value="Media Banda Seco Grande">Media Banda seco Grande</option>
+        <option value="Media Banda Seco Mediano">Media Banda seco Mediano</option>
+        <option value="Media Banda Seco Pequeño">Media Banda Seco Pequeño</option>
+        <option value="Banda Seco Grande">Banda seco Grande</option>
+        <option value="Banda Seco Mediano">Banda seco Mediano</option>
+        <option value="Banda Seco Pequeño">Banda Seco Pequeño</option>
+        <option value="Banda Viso Grande">Banda Viso Grande</option>
+        <option value="Banda Viso Mediano">Banda Viso Mediano</option>
+        <option value="Banda Viso Pequeño">Banda Viso Pequeño</option>
+        <option value="Media Banda Viso Grande">Media Banda Viso Grande</option>
+        <option value="Media Banda Viso Mediano">Media Banda Viso Mediano</option>
+        <option value="Media Banda Viso Pequeño">Media Banda Viso Pequeño</option>
+
+        <option value="Capa Seco Claro Grande">Capa Seco Claro Grande</option>
+        <option value="Capa Seco Claro Mediano">Capa Seco Claro Mediano</option>
+        <option value="Capa Seco Claro Pequeño">Capa Seco Claro Pequeño</option>
+        <option value="Capa Viso Claro Grande">Capa Viso Claro Grande</option>
+        <option value="Capa Viso Claro Mediano">Capa Viso Claro Mediano</option>
+        <option value="Capa Viso Claro Pequeño">Capa Viso Claro Pequeño</option>
+        <option value="Capa XL Seco Claro Grande">Capa XL Seco Claro Grande</option>
+        <option value="Capa XL Seco Claro Mediano">Capa XL Seco Claro Mediano</option>
+        <option value="Capa XL Seco Claro Pequeño">Capa XL Seco Claro Pequeño</option>
+        <option value="Capa XL Viso Claro Grande">Capa XL Viso Claro Grande</option>
+        <option value="Capa XL Viso Claro Mediano">Capa XL Viso Claro Mediano</option>
+        <option value="Capa XL Viso Claro Pequeño">Capa XL Viso Claro Pequeño</option>
+        <option value="Banda Seco Claro Grande">Banda seco Claro Grande</option>
+        <option value="Banda Seco Claro Mediano">Banda seco Claro Mediano</option>
+        <option value="Banda Seco Claro Pequeño">Banda Seco Claro Pequeño</option>
+        <option value="Banda Viso Claro Grande">Banda Viso Claro Grande</option>
+        <option value="Banda Viso Claro Mediano">Banda Viso Claro Mediano</option>
+        <option value="Banda Viso Pequeño">Banda Viso Pequeño</option>
+        <option value="Media Banda Seco Claro Grande"Media >Banda seco Claro Grande</option>
+        <option value="Media Banda Seco Claro Mediano">Media Banda seco Claro Mediano</option>
+        <option value="Media Banda Seco Claro Pequeño">Media Banda Seco Claro Pequeño</option>
+        <option value="Media Banda Viso Claro Grande">Media Banda Viso Claro Grande</option>
+        <option value="Media Banda Viso Claro Mediano">Media Banda Viso Claro Mediano</option>
+        <option value="Media Banda Viso Pequeño">Media Banda Viso Pequeño</option> 
+
+        <option value="Picadura">Picadura Larga</option>
+     </select>
+
+      <label for="fechaCreacion">Fecha de Creación:</label>
+      <input type="date" id="fechaCreacion" required />
+          
+      <label for="etapa">Tara:</label>
+      <input type="text" id="Tara" required />
+      
+      <label for="descripcion">Cosecha:</label>
+      <input type="text" id="cosecha" required />
+      
+      <label for="pesoBruto">Peso Bruto (libras):</label>
+      <div class="input-container"><input type="number" id="pesoBruto" required />
+        <button type="button" id="calcularBtn">Calcular</button>
+      </div>
+      
+      <label for="librasNetas">Libras Netas:</label>
+      <input type="number" id="librasNetas" required />
+      
+    
+      <button type="button" id="registrarPilon">Registrar Paca</button>
+      <button type="button" id="cancelarBtn" href = "../pacas.html">Cancelar</button>
+    </form>
+
+  </main>
+
+  <script src="crearPaca.js"></script>
+</body>
+</html>

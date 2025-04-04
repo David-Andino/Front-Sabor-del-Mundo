@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Empleado</title>
+    <link rel="stylesheet" href="actualizarEmpleado.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Actualizar Empleado</h1>
+        <form id="empleadoForm" enctype="multipart/form-data">
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <!-- Puesto -->
+            <div class="form-group">
+                <label for="puesto">Puesto:</label>
+                <input type="text" id="puesto" name="puesto" required>
+            </div>
+
+            <!-- Tipo de Contrato -->
+            <div class="form-group">
+                <label for="tipo_contrato">Tipo de Contrato:</label>
+                <select id="tipo_contrato" name="tipo_contrato" required>
+                    <option value="hora">Hora</option>
+                    <option value="tarea">Tarea</option>
+                </select>
+            </div>
+
+            <!-- Sueldo Base -->
+            <div class="form-group">
+                <label for="sueldo_base">Sueldo Base:</label>
+                <input type="number" id="sueldo_base" name="sueldo_base" required>
+            </div>
+
+            <!-- Activo -->
+            <div class="form-group">
+                <label for="activo">Estado:</label>
+                <select class="form-control" id="activo" name="activo" required>
+                    <option value="SI">Sí (Activo)</option>
+                    <option value="NO">No (Inactivo)</option>
+                </select>
+            </div>
+
+            <!-- Fecha de Contratación -->
+            <div class="form-group">
+                <label for="fecha_contratacion">Fecha de Contratación:</label>
+                <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
+            </div>
+
+            <!-- Número de Identidad -->
+            <div class="form-group">
+                <label for="numero_identidad">Número de Identidad:</label>
+                <input type="text" id="numero_identidad" name="numero_identidad" pattern="\d{4}-\d{4}-\d{5}" required>
+                <small>Formato: 0000-0000-00000</small>
+            </div>
+
+            <!-- Huella -->
+            <div class="form-group">
+                <label for="huella">Huella (opcional):</label>
+                <input type="text" id="huella" name="huella">
+            </div>
+
+            <!-- Fotografía -->
+            <div class="form-group">
+                <label for="fotografia">Fotografía (opcional):</label>
+                <input type="file" id="fotografia" name="fotografia" accept="image/*" capture="camera">
+                <button type="button" id="tomarFoto">Tomar Foto</button>
+                <video id="video" autoplay style="display: none;"></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+            </div>
+
+            <div class="foto-empleado">
+                <img id="carnetFoto" src="" alt="Foto del empleado">
+            </div>
+
+            <!-- Nuevos Campos -->
+            <!-- Teléfono -->
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" required>
+            </div>
+
+            <!-- Domicilio -->
+            <div class="form-group">
+                <label for="domicilio">Domicilio:</label>
+                <input type="text" id="domicilio" name="domicilio" required>
+            </div>
+
+            <!-- Estado Civil -->
+            <div class="form-group">
+                <label for="estado_civil">Estado Civil:</label>
+                <select id="estado_civil" name="estado_civil" required>
+                    <option value="soltero">Soltero</option>
+                    <option value="casado">Casado</option>
+                    <option value="divorciado">Divorciado</option>
+                    <option value="viudo">Viudo</option>
+                </select>
+            </div>
+
+            <!-- Sexo -->
+            <div class="form-group">
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+
+            <!-- Fecha de Egreso -->
+            <div class="form-group">
+                <label for="fecha_egreso">Fecha de Egreso (opcional):</label>
+                <input type="date" id="fecha_egreso" name="fecha_egreso">
+            </div>
+
+            <!-- Nivel Educativo -->
+            <div class="form-group">
+                <label for="nivel_educativo">Nivel Educativo:</label>
+                <select id="nivel_educativo" name="nivel_educativo" required>
+                    <option value="primaria">Primaria</option>
+                    <option value="secundaria">Secundaria</option>
+                    <option value="universidad">Universidad</option>
+                    <option value="posgrado">Posgrado</option>
+                </select>
+            </div>
+
+            <!-- Nombre de Emergencia -->
+            <div class="form-group">
+                <label for="nombre_emergencia">Nombre de Emergencia:</label>
+                <input type="text" id="nombre_emergencia" name="nombre_emergencia" required>
+            </div>
+
+            <!-- Teléfono de Emergencia -->
+            <div class="form-group">
+                <label for="telefono_emergencia">Teléfono de Emergencia:</label>
+                <input type="text" id="telefono_emergencia" name="telefono_emergencia" required>
+            </div>
+
+            <!-- Lugar de Nacimiento -->
+            <div class="form-group">
+                <label for="lugar_nacimiento">Lugar de Nacimiento:</label>
+                <input type="text" id="lugar_nacimiento" name="lugar_nacimiento" required>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+
+            <!-- Tipo de Contrato de Empleo -->
+            <div class="form-group">
+                <label for="tipo_contrato_empleo">Tipo de Contrato de Empleo:</label>
+                <select id="tipo_contrato_empleo" name="tipo_contrato_empleo" required>
+                    <option value="permanente">Permanente</option>
+                    <option value="temporal">Temporal</option>
+                </select>
+            </div>
+
+            <!-- Beneficiarios -->
+            <div class="form-group">
+                <label for="beneficiarios">Beneficiarios (opcional):</label>
+                <textarea id="beneficiarios" name="beneficiarios"></textarea>
+            </div>
+
+            <!-- Nacionalidad -->
+            <div class="form-group">
+                <label for="nacionalidad">Nacionalidad:</label>
+                <input type="text" id="nacionalidad" name="nacionalidad" required>
+            </div>
+
+            <!-- Botón de Enviar -->
+            <div class="form-group">
+                <button type="submit">Actualizar Empleado</button>
+                <button type="button" id="cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="actualizarEmpleado.js"></script>
+</body>
+</html>

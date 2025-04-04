@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Empleados</title>
+    <link rel="stylesheet" href="empleados.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Empleados</h1>
+
+        <!-- Botones adicionales -->
+        <div class="botones-superiores">
+            <button onclick="window.location.href='./crear/crearEmpleado.html'">Crear Nuevo Empleado</button>
+            <button onclick="window.location.href='../../menuPrincipal/menuPrincipal.html'">Regresar</button>
+            <button onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+
+        <div class="buscadores">
+            <div class="buscador">
+                <label for="buscarNombre">Buscar por Nombre:</label>
+                <input type="text" id="buscarNombre" placeholder="Ingrese nombre del empleado" oninput="filtrarEmpleados()">
+            </div>
+            <div class="buscador">
+                <label for="buscarIdentidad">Buscar por Identidad:</label>
+                <input type="text" id="buscarIdentidad" placeholder="Ingrese número de identidad" oninput="filtrarEmpleados()">
+            </div>
+        </div>
+
+        <!-- Tabla para mostrar empleados -->
+        <table id="empleadosTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Puesto</th>
+                    <th>Tipo de Contrato</th>
+                    <th>Sueldo Base</th>
+                    <th>Activo</th>
+                    <th>Fecha Contratación</th>
+                    <th>Número de Identidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los empleados se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para el carnet del empleado -->
+    <div id="carnetModal" class="modal">
+        <div class="modal-content" id="carnetContent">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <div class="carnet-header">
+                <h2>Sabor del Mundo Tabacos</h2>
+                <div class="logo">
+                    <img id="logo" src="../../src/Bodega1/img/Sabor del mundo Tabacos.jpg" alt="Logo">
+                </div>
+                <h3>Carnet de Empleado</h3>
+            </div>
+            <div class="carnet-body"> <!-- Añadido ID para captura -->
+                <div class="foto-empleado">
+                    <img id="carnetFoto" src="" alt="Foto del empleado">
+                </div>
+                <div class="info-empleado">
+                    <p><strong>Nombre:</strong> <span id="carnetNombre"></span></p>
+                    <p><strong>Puesto:</strong> <span id="carnetPuesto"></span></p>
+                    <p><strong>Número de Identidad:</strong> <span id="carnetIdentidad"></span></p>
+                    <div class="codigo-barras">
+                        <img id="carnetCodigoBarras" src="" alt="Código de barras">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Botón para guardar como imagen -->
+        <button class="guardar-imagen" onclick="guardarCarnetComoImagen()">
+            <i class="fas fa-download"></i> Guardar Carnet
+        </button>
+    </div>
+
+    <!-- Menú flotante -->
+<div class="floating-menu">
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="menu-items">
+        <button class="menu-item" onclick="navegar('asistencia')">
+            <i class="fas fa-user-clock"></i> Asistencia
+        </button>
+        <button class="menu-item" onclick="navegar('nomina')">
+            <i class="fas fa-file-invoice-dollar"></i> Nómina
+        </button>
+        <button class="menu-item" onclick="navegar('derechos')">
+            <i class="fas fa-gavel"></i> Derechos
+        </button>
+    </div>
+</div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="listarEmpleado.js"></script>
+</body>
+</html>

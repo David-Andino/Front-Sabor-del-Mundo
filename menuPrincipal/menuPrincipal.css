@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.buttons, .footer-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px; /* Bordes más cuadrados */
+    transition: 0.3s;
+}
+
+button i {
+    margin-right: 10px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.logout {
+    background-color: #d9534f;
+    color: white;
+    margin-top: 20px; /* Separación adicional */
+}
+
+.download {
+    background-color: #0275d8;
+    color: white;
+    margin-top: 20px;
+}
+
+.admin {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.buttons button {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

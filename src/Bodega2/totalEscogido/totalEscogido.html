@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Escogido</title>
+    <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="totalEscogido.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <ul id="menuList">
+            <li><a href="../../Bodega1/index.html">Bodega 1</a></li>
+            <li class="dropdown">
+              <a href="#" id="bodega2Btn">Bodega 2 ▼</a>
+              <ul class="submenu" id="submenu">
+                <li><a href="../capaA/capaA.html">Capa A</a></li>
+                <li><a href="../capaB/capaB.html">Capa B</a></li>
+                <li><a href="../banda/banda.html">Banda</a></li>
+                <li><a href="./totalEscogido.html">Total Escogido</a></li>
+              </ul>
+            </li>
+              <li class="dropdown">
+                <a href="#" id="bodega3Btn">Bodega 3 ▼</a>
+                <ul class="submenu" id="submenu2" role="menu" aria-label="Submenú Bodega 3">
+                    <li><a href="../../Bodega3/TripaSecoA/tripaSecoA.html">Tripa Seco A</a></li>
+                    <li><a href="../../Bodega3/TripaVisoA/tripaVisoA.html">Tripa Viso A</a></li>
+                    <li><a href="../../Bodega3/tripaLigeroA/tripaLigeroA.html">Tripa Liero A</a></li>
+                    <li><a href="../../Bodega3/capaBgrande/capaBGrande.html">Capa B Grande</a></li>
+                    <li><a href="../../Bodega3/Banda/banda.html">Capa Banda</a></li>
+                    <li><a href="../../Bodega3/tripaSecoB/tripaSecoB.html">Tripa Seco B</a></li>
+                    <li><a href="../../Bodega3/tripaVisoB/tripaVisoB.html">Tripa Viso B</a></li>
+                    <li><a href="../../Bodega3/tripaLigeroB/tripaLigeroB.html">Tripa Ligero B</a></li>
+                    <li><a href="../../Bodega3/totalDespalillo/totalDespalillo.html">Total Despalillo</a></li>
+                </ul>
+            </li>
+            <li><a href="../../inventarioyFacturacion/pacas.html">Inventario</a></li>
+            <li class="logout-button">
+              <button onclick="logout()">
+                  <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+              </button>
+          </li>
+        </ul>
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Filtro de búsqueda y rango de fechas -->
+    <div id="filters">
+        <!-- Botón para Agregar Pilón -->
+        <button id="crearPilonBtn" class="btn btn-primary"><a href="../escogerPilon.html" class="link-clean">Crear Proceso</a></button>
+        <input type="text" id="searchInput" placeholder="Buscar por Numero de pilón" oninput="filterPilones()">
+        <input type="date" id="startDate" onchange="filterPilones()">
+        <input type="date" id="endDate" onchange="filterPilones()">
+    </div>
+
+    <h1>Listado de Pilones Procesados (total escogido)</h1>
+
+    <table id="pilonesTable">
+        <thead>
+            <tr>
+                <th>N Pilón</th>
+                <th>Fecha de Creación</th>
+                <th>Peso Bruto</th>
+                <th>% Humedad</th>
+                <th>Libras Netas</th>
+                <th>Libras Mojadero</th>
+                <th>Variedad</th>
+                <th>Corte</th>
+                <th>Etapa</th>
+                <th>Tripa en rama</th>
+                <th>Picadura larga</th>
+                <th>Picadura</th>
+                <th>total Escogido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="pilonesList">
+            <!-- Aquí se agregarán las filas dinámicamente -->
+        </tbody>
+    </table>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="totalEscogido.js"></script>
+</body>
+</html>

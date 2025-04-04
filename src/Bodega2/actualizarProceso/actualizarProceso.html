@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Proceso</title>
+  <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./actualizarProceso.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      
+      <li class="logout-button">
+        <button onclick="logout()">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Actualizar Proceso<span id="idModalPilon"></span></h1>
+    <form id="pilonForm">
+      <label for="numeroPilon">Número de Pilón:</label>
+      <input type="number" id="numeroPilon" required readonly />
+
+      <label for="fechaCreacion">Fecha:</label>
+      <input type="date" id="fechaCreacion" required />
+
+      <label for="corte">Corte:</label>
+      <input type="text" id="corte" required readonly />
+
+      <label for="etapa">Etapa:</label>
+      <input type="text" id="etapa" required readonly />
+
+
+      <label for="variedad">Variedad:</label>
+      <input type="text" id="variedad" required readonly />
+
+      <label for="pesoBruto">Peso Bruto (libras):</label>
+      <div><input type="number" id="pesoBruto" required readonly /> </div>
+
+      <label for="merma">% humedad:</label>
+      <input type="number" id="merma" required readonly />
+      
+      <label for="librasNetas">Libras Netas:</label>
+      <input type="number" id="librasNetas" required readonly />
+
+      <label for="librasMojadero">Libras Mojadero:</label>
+      <input type="number" id="librasMojadero" required />
+
+      <label for="capa_a_seco_grande">Capa A Seco Grande:</label>
+  <input type="number" id="capa_a_seco_grande" required />
+  
+  <label for="capa_a_seco_claro_grande">Capa A Seco Claro Grande:</label>
+  <input type="number" id="capa_a_seco_claro_grande" required />
+
+  <label for="capa_a_seco_mediana">Capa A Seco Mediano:</label>
+  <input type="number" id="capa_a_seco_mediana" required />
+
+  <label for="capa_a_viso">Capa A Viso:</label>
+  <input type="number" id="capa_a_viso" required />
+
+  <label for="total_capa_a">Total Capa A:</label>
+  <input type="number" id="total_capa_a" required readonly />
+
+  <label for="capa_b_seco_grande">Capa B Seco Grande:</label>
+  <input type="number" id="capa_b_seco_grande" required />
+
+  <label for="capa_b_seco_claro_grande">Capa B Seco Claro Grande:</label>
+  <input type="number" id="capa_b_seco_claro_grande" required />
+
+  <label for="capa_b_seco_mediano">Capa B Seco Mediano:</label>
+  <input type="number" id="capa_b_mediano" required />
+
+  <label for="capa_b_seco_claro_mediano">Capa B Seco Claro Mediano:</label>
+  <input type="number" id="capa_b_seco_claro_mediano" required />
+
+  <label for="capa_b_viso_grande">Capa B Viso Grande:</label>
+  <input type="number" id="capa_b_viso_grande" required />
+
+  <label for="capa_b_viso_mediano">Capa B Viso Mediano:</label>
+  <input type="number" id="capa_b_viso_mediano" required />
+
+  <label for="total_capa_b">Total Capa B:</label>
+  <input type="number" id="total_capa_b" required readonly />
+
+  <label for="banda_seco_grande">Banda Seco Grande:</label>
+  <input type="number" id="banda_seco_grande" required />
+
+  <label for="banda_seco_claro_grande">Banda Seco Claro Grande:</label>
+  <input type="number" id="banda_seco_claro_grande" required />
+
+  <label for="banda_seco_mediano">Banda Seco Mediano:</label>
+  <input type="number" id="banda_seco_mediano" required />
+
+  <label for="banda_seco_claro_mediano">Banda Seco Claro Mediano:</label>
+  <input type="number" id="banda_seco_claro_mediano" required />
+
+  <label for="banda_viso_grande">Banda Viso Grande:</label>
+  <input type="number" id="banda_viso_grande" required />
+
+  <label for="total_banda">Total Banda:</label>
+  <input type="number" id="total_banda" required readonly />
+
+  <label for="tripa_en_rama">Tripa en Rama:</label>
+  <input type="number" id="tripa_en_rama" required />
+
+  <label for="picadura_larga">Picadura Larga:</label>
+  <input type="number" id="picadura_larga" required />
+
+  <label for="picadura">Picadura:</label>
+  <input type="number" id="picadura" required />
+
+  <label for="total_escogido">Total Escogido:</label>
+  <div class="input-container">
+    <input type="number" id="total_escogido" required readonly />
+    <button type="button" id="calcularBtn">Calcular</button>
+  </div>
+    
+  <input type="hidden" id="id_pilon" value="datoValor">
+
+      <div class="form-buttons">
+        <button type="button" id="guardarCambiosPilon">Actualizar</button>
+        <button type="button" id="cancelarActualizacion">Cancelar</button>
+    </div>
+    </form>
+  </main>
+
+  <script src="actualizarProceso.js"></script>
+</body>
+</html>

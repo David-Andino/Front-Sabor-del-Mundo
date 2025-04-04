@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Sistemas</title>
+    <link rel="stylesheet" href="menuPrincipal.css">
+    <script src="https://kit.fontawesome.com/77cfa3800b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Seleccione un Sistema</h1>
+        <div class="buttons">
+            <button id="bodegas" onclick="redirigir('../src/Bodega1/index.html')">
+                <i class="fas fa-boxes"></i> Sistema de Bodegas
+            </button>
+            <button id="personal" onclick="redirigir('../personal/empleados/empleados.html')">
+                <i class="fas fa-user-friends"></i> Control de Personal
+            </button>
+            <button id="finanzas" onclick="redirigir('#')">
+                <i class="fas fa-coins"></i> Gestión de Finanzas
+            </button>
+        </div>
+        <div class="footer-buttons">
+            <button onclick="descargarManual()" class="download">
+                <i class="fas fa-book"></i> Descargar Manual
+            </button>
+            <button id="usuarios" onclick="redirigir('../usuarios/listaUsuarios.html')" class="admin">
+                <i class="fas fa-user-cog"></i> Administrar Usuarios
+            </button>
+            <button onclick="cerrarSesion()" class="logout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <script src="menuPrincipal.js"></script>
+</body>
+</html>

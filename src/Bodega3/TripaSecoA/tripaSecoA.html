@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tripa Seco A</title>
+    <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="tripaSecoA.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <ul id="menuList">
+            <li><a href="../../Bodega1/index.html">Bodega 1</a></li>
+    
+            <li class="dropdown">
+                <a href="#" id="bodega2Btn">Bodega 2 ▼</a>
+                <ul class="submenu" id="submenu" role="menu" aria-label="Submenú Bodega 2">
+                    <li><a href="../../Bodega2/capaA/capaA.html">Capa A</a></li>
+                    <li><a href="../../Bodega2/capaB/capaB.html">Capa B</a></li>
+                    <li><a href="../../Bodega2/banda/banda.html">Banda</a></li>
+                    <li><a href="../../Bodega2/totalEscogido/totalEscogido.html">Total Escogido</a></li>
+                </ul>
+            </li>
+    
+            <li class="dropdown">
+                <a href="#" id="bodega3Btn">Bodega 3 ▼</a>
+                <ul class="submenu" id="submenu2" role="menu" aria-label="Submenú Bodega 3">
+                    <li><a href="./tripaSecoA.html">Tripa Seco A</a></li>
+                    <li><a href="../TripaVisoA/tripaVisoA.html">Tripa Viso A</a></li>
+                    <li><a href="../tripaLigeroA/tripaLigeroA.html">Tripa Liero A</a></li>
+                    <li><a href="../capaBgrande/capaBGrande.html">Capa B Grande</a></li>
+                    <li><a href="../capaBgrande/capaBGrande.html">Capa Banda</a></li>
+                    <li><a href="../tripaSecoB/tripaSecoB.html">Tripa Seco B</a></li>
+                    <li><a href="../tripaVisoB/tripaVisoB.html">Tripa Viso B</a></li>
+                    <li><a href="../tripaLigeroB/tripaLigeroB.html">Tripa Ligero B</a></li>
+                    <li><a href="../totalDespalillo/totalDespalillo.html">Total Despalillo</a></li>
+                </ul>
+            </li>
+            <li><a href="../../inventarioyFacturacion/pacas.html">Inventario</a></li>
+            <li class="logout-button">
+                <button onclick="logout()">
+                    <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+    
+
+    <!-- Filtro de búsqueda y rango de fechas -->
+    <div id="filters">
+        <!-- Botón para Agregar Pilón -->
+        <button id="crearPilonBtn" class="btn btn-primary"><a href="../escogerPilon.html" class="link-clean">Crear Proceso</a></button>
+        <input type="text" id="searchInput" placeholder="Buscar por Numero de pilón" oninput="filterPilones()">
+        <input type="date" id="startDate" onchange="filterPilones()">
+        <input type="date" id="endDate" onchange="filterPilones()">
+    </div>
+
+    <h1>Listado de Pilones Despaillados (Tripa Seco A)</h1>
+
+    <table id="pilonesTable">
+        <thead>
+            <tr>
+                <th>N Pilón</th>
+                <th>Fecha de Creación</th>
+                <th>Peso Bruto</th>
+                <th>% Humedad</th>
+                <th>Libras Netas</th>
+                <th>Libras Mojadero</th>
+                <th>Variedad</th>
+                <th>Corte</th>
+                <th>Etapa</th>
+                <th>Desp Seco Grande A</th>
+                <th>Tripa Desp Seco Mediano A</th>
+                <th>Desp Seco Pequeño A</th>
+                <th>total Tripa Seco A</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="pilonesList">
+            <!-- Aquí se agregarán las filas dinámicamente -->
+        </tbody>
+    </table>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="tripaSecoA.js"></script>
+</body>
+</html>

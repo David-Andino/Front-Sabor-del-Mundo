@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Pilón</title>
+  <link rel="icon" href="../img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      
+      <li class="logout-button">
+        <button onclick="logout()">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Actualizar Pilón <span id="idModalPilon"></span></h1>
+    <form id="pilonForm">
+      <label for="numeroPilon">Número de Pilón:</label>
+      <input type="number" id="numeroPilon" required />
+
+      <label for="fechaCreacion">Fecha de Creación:</label>
+      <input type="date" id="fechaCreacion" required />
+
+      <label for="corte">Corte:</label>
+      <input type="text" id="corte" required />
+
+      <label for="etapa">Etapa:</label>
+      <input type="text" id="etapa" required />
+
+      <label for="descripcion">Descripción:</label>
+      <input type="text" id="descripcion" required />
+
+      <label for="nombreFinca">Nombre de la Finca:</label>
+      <input type="text" id="nombreFinca" required />
+
+      <label for="variedad">Variedad:</label>
+      <input type="text" id="variedad" required />
+
+      <label for="numeroViaje">Número de Viaje:</label>
+      <input type="number" id="numeroViaje" required />
+
+      <label for="observacion">Observación:</label>
+      <input type="text" id="observacion" />
+
+      <label for="numeroCajas">Número de Cajas:</label>
+      <input type="number" id="numeroCajas" required min="1" />
+
+      <label for="pesoBruto">Peso Bruto (libras):</label>
+      <div><input type="number" id="pesoBruto" required /> </div>
+
+      <label for="merma">% humedad:</label>
+      <input type="number" id="merma" required />
+      
+      <label for="librasNetas">Libras Netas:</label>
+      <input type="number" id="librasNetas" required />
+
+    
+      <div class="form-buttons">
+        <button type="button" id="guardarCambiosPilon">Actualizar Pilón</button>
+        <button type="button" id="cancelarActualizacion">Cancelar</button>
+    </div>
+    </form>
+
+    <!-- Modal para agregar cajas -->
+    <div id="modalCajas" class="modal">
+      <div class="modal-content">
+        <h2>Actualizar Caja</h2>
+        <p>Caja: <span id="numeroCajaActualact"></span> de <span id="totalCajas"></span></p>
+
+        <label for="pesoCaja">Peso de la Caja (lbs):</label>
+        <input type="number" id="pesoCaja1" required>
+
+        <button id="actualizarCajaBtn">Guardar Caja</button>
+        <button onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="actualizar.js"></script>
+</body>
+</html>

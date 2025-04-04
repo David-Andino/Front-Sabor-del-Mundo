@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Usuarios</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="listaUsuarios.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Listado de Usuarios</h1>
+        <button id="crearUsuario">Crear Usuario</button>
+        <button class="logout" onclick="logout()">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+        <button class="regresar" onclick="regresar()">
+            <i class="fas fa-arrow-left"></i> <span>Regresar</span>
+        </button>
+        <table id="tablaUsuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Sistemas Permitidos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los usuarios se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="listaUsuarios.js"></script>
+</body>
+</html>

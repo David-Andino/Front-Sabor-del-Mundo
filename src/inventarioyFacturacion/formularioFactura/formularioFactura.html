@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos Factura</title>
+  <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="formularioFactura.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li class="logout-button">
+        <button onclick="logout()">
+            <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+    </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Datos de la Factura</h1>
+    <form id="pilonForm">
+      <label for="numeroPilon">Número de Factura:</label>
+      <input type="text" id="numeroFactura" placeholder="000-001-01-00000060" required max="17"/>
+      
+      <label for="fechaEmision">Fecha de emisión:</label>
+      <input type="date" id="fechaEmision" required />
+      
+      <label for="NombreCliente">Nombre de Cliente:</label>
+      <input type="text" id="cliente" required />
+
+      <label for="direccionCliente">Direccion de Cliente:</label>
+      <input type="text" id="Dircliente" required />
+      
+      <label for="RtnCliente">RTN del Cliente:</label>
+      <input type="number" id="clienteRtn" required />
+      
+      <label for="correoCliente">Correo del Cliente:</label>
+      <input type="email" id="email" required />
+      
+      <label for="cai">CAI:</label>
+      <input type="text" id="cai" placeholder="C3BAAE-BB1B1C-854BB4-1F0760-A4A3EC-57" required maxlength="37"/>
+      
+      <label for="NumOrdenExenta">N° de orden de compra exenta:</label>
+      <input type="text" id="numOrdenCE" required />
+      
+      <label for="registroSAG">N° de registro de la SAG:</label>
+      <input type="text" id="numSag" required />
+      
+      <label for="constanciaExonerado">N° de constancia de resgistro exonerado:</label>
+      <input type="text" id="numConstancia" />
+
+      <label for="moneda">Tipo de moneda:</label>
+      <select name="moneda" id="moneda">
+        <option value="">-- Seleccione --</option>
+        <option value="Lempiras">Lempiras</option>
+        <option value="Dolares">Dolares</option>
+      </select>
+      
+      <label for="fechaLimite">Fecha Vencimiento:</label>
+      <input type="date" id="fechaLimite" required min="1" />
+      
+      <label for="pesoBruto">Isv 15%:</label>
+      <input type="number" id="inputIsv15" required readonly/>
+
+      <label for="pesoBruto">Isv 18%:</label>
+      <input type="number" id="inputIsv18" required readonly/>
+
+      <input type="hidden" id="Exento" name="Exento" >
+      <input type="hidden" id="Exonerado" name="Exonerado" >
+
+    
+      <label for="pesoBruto">Total:</label>
+      <div class="input-container"><input type="number" id="total" required readonly/>
+        <button type="button" id="seleccionarBtn">Seleccionar Pacas</button>
+      </div>    
+    
+
+      <button type="button" id="registrarPilon">Siguiente</button>
+      <button type="button" id="cancelarBtn" href = "../pacas.html">Cancelar</button>
+    </form>
+
+    <div id="modalCajas" class="modal">
+      <div class="modal-content">
+        <h2>Seleccionar Pacas</h2>
+        <input type="text" id="searchPacaInput" placeholder="Buscar por número de paca..." />
+        <table id="tablaPacas">
+          <thead>
+            <tr>
+              <th>Seleccionar</th>
+              <th>Número de Paca</th>
+              <th>Tipo de Paca</th>
+              <th>Peso Bruto (lbs)</th>
+              <th>Peso Neto (lbs)</th>
+              <th>Precio Unitario</th>
+              <th>Descuento</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="pacasTableBody"></tbody>
+          <tbody>
+            <!-- Las filas de pacas se generarán dinámicamente con JavaScript -->
+          </tbody>
+        </table>
+    
+        <label for="tipoImporteL">Tipo de Importe:</label>
+        <select id="tipoImporte">
+          <option value="normal">Normal</option>
+          <option value="exento">Exento</option>
+          <option value="exonerado">Exonerado</option>
+        </select>
+    
+        <div>
+          <label><input type="checkbox" id="gravado18" /> Calcular Importe Gravado 18%: <span id="ImpGravado18">0.00</span></label><br>
+          <label><input type="checkbox" id="gravado15" /> Calcular Importe Gravado 15%: <span id="ImpGravado15">0.00</span></label><br>
+          <label><input type="checkbox" id="isv15" /> Calcular ISV 15%: <span id="isv15s">0.00</span></label><br>
+          <label><input type="checkbox" id="isv18" /> Calcular ISV 18%: <span id="isv18s">0.00</span></label>
+        </div>
+    
+        <h3>Total Factura: <span id="totalFactura">0.00</span> Lempiras</h3>
+    
+        <button id="guardarPacasBtn">Guardar Selección</button>
+        <button onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+
+  <script src="formularioFactura.js"></script>
+</body>
+</html>

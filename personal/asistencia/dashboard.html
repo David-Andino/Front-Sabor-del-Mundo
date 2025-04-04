@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Asistencias</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <img src="../../src/Bodega1/img/Sabor-del-mundo-Tabacos.ico" alt="Logo">
+            <h1>Sistema de Asistencias</h1>
+        </div>
+        <div class="nav-user">
+            <span id="username-display"></span>
+            <button onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li class="active">
+                <a href="./dashboard.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./registroAsistencia/registroAsistencia.html">
+                    <i class="fas fa-fingerprint"></i>
+                    <span>Registro</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/asistencias/resumen.html">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Resumen</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/empleados/historial.html">
+                    <i class="fas fa-history"></i>
+                    <span>Historial</span>
+                </a>
+            </li>
+            <li>
+                <a href="../pages/empleados/permisos.html">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Permisos</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main class="dashboard-content">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <div class="date-selector">
+                <input type="date" id="fecha-selector">
+                <button onclick="loadDashboardData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="dashboard-card">
+                <div class="card-icon" style="background-color: #4CAF50;">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Asistencias Hoy</h3>
+                    <p id="asistencias-hoy">0</p>
+                    <span id="asistencias-tendencia" class="positive">+0%</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="dashboard-card">
+                <div class="card-icon" style="background-color: #F44336;">
+                    <i class="fas fa-user-times"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Faltas Hoy</h3>
+                    <p id="faltas-hoy">0</p>
+                    <span id="faltas-tendencia" class="negative">+0%</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="dashboard-card">
+                <div class="card-icon" style="background-color: #FFC107;">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Permisos</h3>
+                    <p id="permisos-hoy">0</p>
+                    <span id="permisos-tendencia">0 pendientes</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="dashboard-card">
+                <div class="card-icon" style="background-color: #2196F3;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="card-info">
+                    <h3>Total Empleados</h3>
+                    <p id="total-empleados">0</p>
+                    <span id="empleados-activos">0 activos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimos Registros -->
+        <div class="recent-activity">
+            <h3>Últimos Registros</h3>
+            <table id="last-registers">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Hora</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Datos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

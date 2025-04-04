@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Despalillo - Bodega #3</title>
+  <link rel="icon" href="../../Bodega1/img/Sabor-del-mundo-Tabacos.ico" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./actualizarDespalillo.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li class="logout-button">
+        <button onclick="logout()">
+          <i class="fas fa-power-off"></i> <span>Cerrar Sesión</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Actualizar Despalillo - Bodega #3</h1>
+    <form id="pilonForm">
+      <!-- Datos básicos -->
+      <label for="numero_pilon">Número de Pilón:</label>
+      <input type="number" id="numero_pilon" required readonly />
+
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" required />
+
+      <label for="corte">Corte:</label>
+      <input type="text" id="corte" required readonly />
+
+      <label for="etapa">Etapa:</label>
+      <input type="text" id="etapa" required readonly />
+
+      <label for="variedad">Variedad:</label>
+      <input type="text" id="variedad" required readonly />
+
+      <label for="peso_bruto">Peso Bruto (libras):</label>
+      <input type="number" id="peso_bruto" step="0.01" required readonly />
+
+      <label for="merma">Humedad (%):</label>
+      <input type="number" id="merma" step="0.01" required readonly />
+
+      <label for="peso_neto">Peso Neto (libras):</label>
+      <input type="number" id="peso_neto" step="0.01" required readonly />
+
+      <label for="libras_mojadero">Libras Mojadero:</label>
+      <input type="number" id="libras_mojadero"  required />
+
+      <!-- Sección Tripa A -->
+      <label for="tripa_desp_seco_grande_a">Tripa Desp. Seco Grande A:</label>
+      <input type="number" id="tripa_desp_seco_grande_a"  required />
+
+      <label for="tripa_desp_seco_mediana_a">Tripa Desp. Seco Mediana A:</label>
+      <input type="number" id="tripa_desp_seco_mediana_a" step="0.01" required />
+
+      <label for="tripa_desp_seco_pequeno_a">Tripa Desp. Seco Pequeño A:</label>
+      <input type="number" id="tripa_desp_seco_pequeno_a" step="0.01" required />
+
+      <label for="total_tripa_seco_a">Total Tripa Seco A:</label>
+      <input type="number" id="total_tripa_seco_a" step="0.01" required readonly />
+
+      <label for="tripa_desp_viso_grande_a">Tripa Desp. Viso Grande A:</label>
+      <input type="number" id="tripa_desp_viso_grande_a" step="0.01" required />
+
+      <label for="tripa_desp_viso_mediana_a">Tripa Desp. Viso Mediana A:</label>
+      <input type="number" id="tripa_desp_viso_mediana_a" step="0.01" required />
+
+      <label for="tripa_desp_viso_pequeno_a">Tripa Desp. Viso Pequeño A:</label>
+      <input type="number" id="tripa_desp_viso_pequeno_a" step="0.01" required />
+
+      <label for="total_tripa_viso_a">Total Tripa Viso A:</label>
+      <input type="number" id="total_tripa_viso_a" step="0.01" required readonly />
+
+      <label for="tripa_desp_ligero_grande_a">Tripa Desp. Ligero Grande A:</label>
+      <input type="number" id="tripa_desp_ligero_grande_a" step="0.01" required />
+
+      <label for="tripa_desp_ligero_mediana_a">Tripa Desp. Ligero Mediana A:</label>
+      <input type="number" id="tripa_desp_ligero_mediana_a" step="0.01" required />
+
+      <label for="tripa_desp_ligero_pequeno_a">Tripa Desp. Ligero Pequeño A:</label>
+      <input type="number" id="tripa_desp_ligero_pequeno_a" step="0.01" required />
+
+      <label for="total_tripa_ligero_a">Total Tripa Ligero A:</label>
+      <input type="number" id="total_tripa_ligero_a" step="0.01" required readonly />
+
+      <!-- Sección Capa y Banda -->
+      <label for="capa_b_seco_grande">Capa B Seco Grande:</label>
+      <input type="number" id="capa_b_seco_grande" step="0.01" required />
+
+      <label for="total_capa_b_grande">Total Capa B Grande:</label>
+      <input type="number" id="total_capa_b_grande" step="0.01" required readonly />
+
+      <label for="banda_seco_grande">Banda Seco Grande:</label>
+      <input type="number" id="banda_seco_grande" step="0.01" required />
+
+      <label for="banda_seco_mediana">Banda Seco Mediana:</label>
+      <input type="number" id="banda_seco_mediana" step="0.01" required />
+
+      <label for="banda_seco_pequena">Banda Seco Pequeña:</label>
+      <input type="number" id="banda_seco_pequena" step="0.01" required />
+
+      <label for="banda_viso_grande">Banda Viso Grande:</label>
+      <input type="number" id="banda_viso_grande" step="0.01" required />
+
+      <label for="total_banda">Total Banda:</label>
+      <input type="number" id="total_banda" step="0.01" required readonly />
+
+      <!-- Sección Tripa B -->
+      <label for="tripa_desp_seco_grande_b">Tripa Desp. Seco Grande B:</label>
+      <input type="number" id="tripa_desp_seco_grande_b" step="0.01" required />
+
+      <label for="tripa_desp_seco_mediana_b">Tripa Desp. Seco Mediana B:</label>
+      <input type="number" id="tripa_desp_seco_mediana_b" step="0.01" required />
+
+      <label for="tripa_desp_seco_pequeno_b">Tripa Desp. Seco Pequeño B:</label>
+      <input type="number" id="tripa_desp_seco_pequeno_b" step="0.01" required />
+
+      <label for="total_tripa_seco_b">Total Tripa Seco B:</label>
+      <input type="number" id="total_tripa_seco_b" step="0.01" required readonly />
+
+      <label for="tripa_desp_viso_grande_b">Tripa Desp. Viso Grande B:</label>
+      <input type="number" id="tripa_desp_viso_grande_b" step="0.01" required />
+
+      <label for="tripa_desp_viso_grande_b_pelotoso">Tripa Desp. Viso Grande B Pelotoso:</label>
+      <input type="number" id="tripa_desp_viso_grande_b_pelotoso" step="0.01" required />
+
+      <label for="tripa_desp_viso_mediana_b">Tripa Desp. Viso Mediana B:</label>
+      <input type="number" id="tripa_desp_viso_mediana_b" step="0.01" required />
+
+      <label for="tripa_desp_viso_mediana_b_pelotoso">Tripa Desp. Viso Mediana B Pelotoso:</label>
+      <input type="number" id="tripa_desp_viso_mediana_b_pelotoso" step="0.01" required />
+
+      <label for="tripa_desp_viso_pequeno_b">Tripa Desp. Viso Pequeño B:</label>
+      <input type="number" id="tripa_desp_viso_pequeno_b" step="0.01" required />
+
+      <label for="total_tripa_viso_b">Total Tripa Viso B:</label>
+      <input type="number" id="total_tripa_viso_b" step="0.01" required readonly />
+
+      <label for="tripa_desp_ligero_grande_b">Tripa Desp. Ligero Grande B:</label>
+      <input type="number" id="tripa_desp_ligero_grande_b" step="0.01" required />
+
+      <label for="tripa_desp_ligero_grande_b_pelotoso">Tripa Desp. Ligero Grande B Pelotoso:</label>
+      <input type="number" id="tripa_desp_ligero_grande_b_pelotoso" step="0.01" required />
+
+      <label for="tripa_desp_ligero_mediano_b">Tripa Desp. Ligero Mediano B:</label>
+      <input type="number" id="tripa_desp_ligero_mediano_b" step="0.01" required />
+
+      <label for="tripa_desp_ligero_mediano_b_pelotoso">Tripa Desp. Ligero Mediano B Pelotoso:</label>
+      <input type="number" id="tripa_desp_ligero_mediano_b_pelotoso" step="0.01" required />
+
+      <label for="tripa_desp_ligero_pequeno_b">Tripa Desp. Ligero Pequeño B:</label>
+      <input type="number" id="tripa_desp_ligero_pequeno_b" step="0.01" required />
+
+      <label for="total_tripa_ligero_b">Total Tripa Ligero B:</label>
+      <input type="number" id="total_tripa_ligero_b" step="0.01" required readonly />
+
+      <!-- Sección Otros -->
+      <label for="pelotoso">Pelotoso:</label>
+      <input type="number" id="pelotoso" step="0.01" required />
+
+      <label for="picadura">Picadura:</label>
+      <input type="number" id="picadura" step="0.01" required />
+
+      <label for="vena">Vena:</label>
+      <input type="number" id="vena" step="0.01" required />
+
+      <label for="hojas_verdes">Hojas Verdes:</label>
+      <input type="number" id="hojas_verdes" step="0.01" required />
+
+      <label for="total_despalillo">Total Despalillo:</label>
+      <div class="input-container">
+        <input type="number" id="total_despalillo" required readonly />
+        <button type="button" id="calcularBtn">Calcular</button>
+      </div>
+
+      <input type="hidden" id="id_pilon" value="datoValor">
+
+      <!-- Botones del formulario -->
+      <div class="form-buttons">
+        <button type="button" id="guardarCambiosPilon">Actualizar</button>
+        <button type="button" id="cancelarActualizacion">Cancelar</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="actualizarDespalillo.js"></script>
+</body>
+</html>
