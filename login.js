@@ -39,7 +39,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
             // Redirigir al usuario después de 2 segundos
             setTimeout(() => {
-                window.location.href = 'menuPrincipal/menuPrincipal.html'; // Cambia esta ruta según tu proyecto
+                window.location.href = './menuPrincipal/menuPrincipal.html'; // Cambia esta ruta según tu proyecto
             }, 2000);
         } else {
             throw new Error('No se recibió un token de autenticación.');
