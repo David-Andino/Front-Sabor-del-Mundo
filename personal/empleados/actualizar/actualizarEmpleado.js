@@ -1,3 +1,35 @@
+function verificarAutenticacion() {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+        // Si no hay token, redirigir al login
+        window.location.href = '../../../login.html';
+        return;
+    }
+
+    // Verificar el token con el backend
+    fetch('https://loginbackend-production.up.railway.app/api/auth/verify-token', {
+        method: 'GET',
+        headers: {
+            'Authorization': token, // Enviar el token en el encabezado
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Si el token no es válido, redirigir al login
+            localStorage.removeItem('authToken'); // Eliminar el token inválido
+            window.location.href = '../../../login.html';
+        }
+    })
+    .catch(error => {
+        console.error('Error al verificar el token:', error);
+        window.location.href = '../../../login.html';
+    });
+
+}
+
+verificarAutenticacion();
+
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const empleadoId = urlParams.get('id');
@@ -16,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Obtener los datos del empleado
     try {
-        const response = await fetch(`http://localhost:5000/api/empleados/${empleadoId}`);
+        const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`);
         if (!response.ok) throw new Error('No se pudo obtener el empleado');
         
         const data = await response.json();
@@ -46,10 +78,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('nacionalidad').value = data.nacionalidad || '';
 
         // Mostrar la foto del empleado
-        const rutaBase = 'http://localhost:5000/imagenesEmpleados/';
-        document.getElementById('carnetFoto').src = data.ruta_fotografia 
-            ? rutaBase + data.ruta_fotografia 
-            : rutaBase + 'predeterminado.png';
+         const urlCompleta = data.foto ? data.foto : 'https://via.placeholder.com/150?text=Sin+Foto';
+        document.getElementById('carnetFoto').src = urlCompleta
+
     } catch (error) {
         console.error('Error al obtener los datos del empleado:', error);
         alert('Error al obtener los datos del empleado');
@@ -127,18 +158,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         formData.append('nacionalidad', document.getElementById('nacionalidad').value || '');
     
         // Manejar la fotografía
-        if (fotografiaInput.files[0] && fotografiaInput.files[0].size > 0) {
+        if (fotografiaInput.files[0]) {
             formData.append('fotografia', fotografiaInput.files[0]);
-        }
-    
-        // Debug: Mostrar datos en consola
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
         }
     
         // Enviar los datos al backend
         try {
-            const response = await fetch(`http://localhost:5000/api/empleados/${empleadoId}`, {
+
+            const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`, {
                 method: 'PUT',
                 body: formData,
             });

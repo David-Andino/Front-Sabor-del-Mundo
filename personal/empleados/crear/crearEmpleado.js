@@ -8,7 +8,7 @@ function verificarAutenticacion() {
     }
 
     // Verificar el token con el backend
-    fetch('http://localhost:4000/api/auth/verify-token', {
+    fetch('https://loginbackend-production.up.railway.app/api/auth/verify-token', {
         method: 'GET',
         headers: {
             'Authorization': token, // Enviar el token en el encabezado
@@ -128,13 +128,9 @@ video.addEventListener('click', () => {
             formData.append('fotografia', fotografiaInput.files[0]);
         }
     
-        // Debug: Mostrar datos que se enviarán
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
-    
         // Enviar los datos al backend
         try {
+  
             const response = await fetch('https://personal-backend-ggeb.onrender.com/api/empleados/crear', {
                 method: 'POST',
                 body: formData,

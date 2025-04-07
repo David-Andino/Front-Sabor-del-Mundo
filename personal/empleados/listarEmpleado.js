@@ -79,10 +79,10 @@ function actualizarTabla(empleados) {
     });
 }
 
-// Función para mostrar el modal con la información del empleado
+// Función para mostrar la imagen del empleado
 async function mostrarCarnet(id) {
     try {
-        // Obtener la información del empleado
+        // Obtener la información del empleado desde el servidor
         const response = await fetch(`${API_URL}/${id}`);
         const empleado = await response.json();
 
@@ -91,19 +91,11 @@ async function mostrarCarnet(id) {
         document.getElementById('carnetPuesto').textContent = empleado.puesto;
         document.getElementById('carnetIdentidad').textContent = empleado.numero_identidad;
 
-        // Construir la URL completa de la imagen
-        const rutaBase = 'https://personal-backend-ggeb.onrender.com/imagenesEmpleados/';
-        const nombreArchivo = empleado.ruta_fotografia;
-        const urlCompleta = rutaBase + nombreArchivo;
+        // Asignar la URL completa de la imagen desde Cloudinary
+        const urlCompleta = empleado.foto ? empleado.foto : 'https://via.placeholder.com/150?text=Sin+Foto';
 
-        console.log('URL de la imagen:', urlCompleta);
-
-        // Mostrar la foto del empleado (si existe)
-        if (empleado.ruta_fotografia) {
-            document.getElementById('carnetFoto').src = urlCompleta;
-        } else {
-            document.getElementById('carnetFoto').src = 'https://personal-backend-ggeb.onrender.com/imagenesEmpleados/predeterminado.png';
-        }
+        // Mostrar la foto del empleado
+        document.getElementById('carnetFoto').src = urlCompleta;
 
         // Generar el código de barras
         JsBarcode("#carnetCodigoBarras", empleado.numero_identidad, {
@@ -119,6 +111,9 @@ async function mostrarCarnet(id) {
         console.error('Error:', error);
     }
 }
+
+
+
 
 function filtrarEmpleados() {
     const nombreBusqueda = document.getElementById('buscarNombre').value.toLowerCase();
