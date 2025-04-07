@@ -1,259 +1,189 @@
-// Función para verificar autenticación
 function verificarAutenticacion() {
     const token = localStorage.getItem('authToken');
+
     if (!token) {
+        // Si no hay token, redirigir al login
         window.location.href = '../../../login.html';
-        return false;
+        return;
     }
-    return true;
-}
 
-// Función para mostrar mensajes al usuario
-function mostrarMensaje(mensaje, tipo = 'error') {
-    const contenedor = document.createElement('div');
-    contenedor.className = tipo === 'error' ? 'mensaje-error' : 'mensaje-exito';
-    contenedor.textContent = mensaje;
-    document.body.appendChild(contenedor);
-    
-    setTimeout(() => {
-        contenedor.remove();
-    }, 5000);
-}
-
-// Función para manejar la cámara
-function manejarCamara(video, canvas, boton, inputFoto) {
-    let stream = null;
-    
-    boton.addEventListener('click', function() {
-        if (stream) {
-            detenerCamara(stream);
-            stream = null;
-            boton.textContent = 'Tomar Foto';
-            video.style.display = 'none';
-            return;
+    // Verificar el token con el backend
+    fetch('https://loginbackend-production.up.railway.app/api/auth/verify-token', {
+        method: 'GET',
+        headers: {
+            'Authorization': token, // Enviar el token en el encabezado
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            // Si el token no es válido, redirigir al login
+            localStorage.removeItem('authToken'); // Eliminar el token inválido
+            window.location.href = '../../../login.html';
         }
-        
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function(mediaStream) {
-                stream = mediaStream;
-                video.srcObject = stream;
-                video.style.display = 'block';
-                boton.textContent = 'Detener Cámara';
-            })
-            .catch(function(error) {
-                mostrarMensaje('No se pudo acceder a la cámara: ' + error.message);
-                console.error('Error al acceder a la cámara:', error);
-            });
+    })
+    .catch(error => {
+        console.error('Error al verificar el token:', error);
+        window.location.href = '../../../login.html';
     });
-    
-    video.addEventListener('click', function() {
-        if (!stream) return;
-        
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-        
-        canvas.toBlob(function(blob) {
-            const file = new File([blob], 'foto-empleado.png', { type: 'image/png' });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            inputFoto.files = dataTransfer.files;
-            
-            // Mostrar vista previa
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('fotoPreview').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-            
-            detenerCamara(stream);
-            stream = null;
-            video.style.display = 'none';
-            boton.textContent = 'Tomar Foto';
-        }, 'image/png');
-    });
-    
-    function detenerCamara(stream) {
-        stream.getTracks().forEach(function(track) {
-            track.stop();
-        });
-    }
+
 }
 
-// Función para cargar datos del empleado
-async function cargarDatosEmpleado(id) {
-    if (!verificarAutenticacion()) return;
-    
-    try {
-        mostrarCargando(true);
-        const token = localStorage.getItem('authToken');
-        const respuesta = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${id}`, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        
-        if (!respuesta.ok) {
-            throw new Error('Error al obtener datos del empleado');
-        }
-        
-        const datos = await respuesta.json();
-        llenarFormulario(datos);
-    } catch (error) {
-        mostrarMensaje(error.message);
-        console.error('Error:', error);
-    } finally {
-        mostrarCargando(false);
-    }
-}
+verificarAutenticacion();
 
-// Función para llenar el formulario con datos
-function llenarFormulario(datos) {
-    const campos = {
-        'nombre': datos.nombre || '',
-        'puesto': datos.puesto || '',
-        'tipo_contrato': datos.tipo_contrato || '',
-        'sueldo_base': datos.sueldo_base || '',
-        'activo': datos.activo === 1 || datos.activo === true || datos.activo === 'SI' ? 'SI' : 'NO',
-        'fecha_contratacion': datos.fecha_contratacion ? datos.fecha_contratacion.split('T')[0] : '',
-        'numero_identidad': datos.numero_identidad || '',
-        'huella': datos.ruta_huella || '',
-        'telefono': datos.telefono || '',
-        'domicilio': datos.domicilio || '',
-        'estado_civil': datos.estado_civil || '',
-        'sexo': datos.sexo || '',
-        'fecha_egreso': datos.fecha_egreso ? datos.fecha_egreso.split('T')[0] : '',
-        'nivel_educativo': datos.nivel_educativo || '',
-        'nombre_emergencia': datos.nombre_emergencia || '',
-        'telefono_emergencia': datos.telefono_emergencia || '',
-        'lugar_nacimiento': datos.lugar_nacimiento || '',
-        'fecha_nacimiento': datos.fecha_nacimiento ? datos.fecha_nacimiento.split('T')[0] : '',
-        'tipo_contrato_empleo': datos.tipo_contrato_empleo || '',
-        'beneficiarios': datos.beneficiarios || '',
-        'nacionalidad': datos.nacionalidad || ''
-    };
-    
-    Object.keys(campos).forEach(function(id) {
-        const elemento = document.getElementById(id);
-        if (elemento) {
-            elemento.value = campos[id];
-        }
-    });
-    
-    // Mostrar foto actual
-    const fotoUrl = datos.foto || 'https://via.placeholder.com/150?text=Sin+Foto';
-    const fotoPreview = document.getElementById('fotoPreview');
-    if (fotoPreview) {
-        fotoPreview.src = fotoUrl;
-    }
-}
-
-// Función para validar el formulario
-function validarFormulario() {
-    const camposRequeridos = [
-        'nombre', 'puesto', 'tipo_contrato', 'sueldo_base',
-        'fecha_contratacion', 'numero_identidad'
-    ];
-    
-    let valido = true;
-    
-    camposRequeridos.forEach(function(id) {
-        const elemento = document.getElementById(id);
-        if (elemento && !elemento.value.trim()) {
-            mostrarMensaje(`El campo ${elemento.labels[0].textContent} es requerido`);
-            elemento.focus();
-            valido = false;
-            return false; // Salir del forEach
-        }
-    });
-    
-    return valido;
-}
-
-// Función para mostrar/ocultar estado de carga
-function mostrarCargando(mostrar) {
-    const boton = document.getElementById('btnActualizar');
-    if (boton) {
-        boton.disabled = mostrar;
-        boton.innerHTML = mostrar ? 
-            '<span class="spinner"></span> Procesando...' : 
-            'Actualizar Empleado';
-    }
-}
-
-// Función principal al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    if (!verificarAutenticacion()) return;
-    
+document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const empleadoId = urlParams.get('id');
-    
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const tomarFotoBtn = document.getElementById('tomarFoto');
+    const fotografiaInput = document.getElementById('fotografia');
+    const cancelarBtn = document.getElementById('cancelar');
+    let stream;
+
     if (!empleadoId) {
-        mostrarMensaje('ID de empleado no especificado');
+        alert('ID de empleado no proporcionado');
         window.location.href = '../empleados.html';
         return;
     }
-    
-    // Configurar cámara
-    const video = document.getElementById('videoCamara');
-    const canvas = document.getElementById('canvasFoto');
-    const btnTomarFoto = document.getElementById('btnTomarFoto');
-    const inputFoto = document.getElementById('fotografia');
-    
-    if (video && canvas && btnTomarFoto && inputFoto) {
-        manejarCamara(video, canvas, btnTomarFoto, inputFoto);
+
+    // Obtener los datos del empleado
+    try {
+        const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`);
+        if (!response.ok) throw new Error('No se pudo obtener el empleado');
+        
+        const data = await response.json();
+
+        // Llenar los campos del formulario con los datos del empleado
+        document.getElementById('nombre').value = data.nombre || '';
+        document.getElementById('puesto').value = data.puesto || '';
+        document.getElementById('tipo_contrato').value = data.tipo_contrato || '';
+        document.getElementById('sueldo_base').value = data.sueldo_base || '';
+        // Cambio importante para el campo activo (usando select)
+        document.getElementById('activo').value = data.activo === 1 || data.activo === true || data.activo === 'SI' ? 'SI' : 'NO';
+        document.getElementById('fecha_contratacion').value = data.fecha_contratacion?.split("T")[0] || '';
+        document.getElementById('numero_identidad').value = data.numero_identidad || '';
+        document.getElementById('huella').value = data.ruta_huella || '';
+        document.getElementById('telefono').value = data.telefono || '';
+        document.getElementById('domicilio').value = data.domicilio || '';
+        document.getElementById('estado_civil').value = data.estado_civil || '';
+        document.getElementById('sexo').value = data.sexo || '';
+        document.getElementById('fecha_egreso').value = data.fecha_egreso?.split("T")[0] || '';
+        document.getElementById('nivel_educativo').value = data.nivel_educativo || '';
+        document.getElementById('nombre_emergencia').value = data.nombre_emergencia || '';
+        document.getElementById('telefono_emergencia').value = data.telefono_emergencia || '';
+        document.getElementById('lugar_nacimiento').value = data.lugar_nacimiento || '';
+        document.getElementById('fecha_nacimiento').value = data.fecha_nacimiento?.split("T")[0] || '';
+        document.getElementById('tipo_contrato_empleo').value = data.tipo_contrato_empleo || '';
+        document.getElementById('beneficiarios').value = data.beneficiarios || '';
+        document.getElementById('nacionalidad').value = data.nacionalidad || '';
+
+        // Mostrar la foto del empleado
+         const urlCompleta = data.foto ? data.foto : 'https://via.placeholder.com/150?text=Sin+Foto';
+        document.getElementById('carnetFoto').src = urlCompleta
+
+    } catch (error) {
+        console.error('Error al obtener los datos del empleado:', error);
+        alert('Error al obtener los datos del empleado');
     }
-    
-    // Cargar datos del empleado
-    cargarDatosEmpleado(empleadoId);
-    
-    // Manejar envío del formulario
-    const formulario = document.getElementById('formularioEmpleado');
-    if (formulario) {
-        formulario.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (!validarFormulario()) return;
-            
-            try {
-                mostrarCargando(true);
-                const token = localStorage.getItem('authToken');
-                const formData = new FormData(formulario);
-                
-                const respuesta = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`, {
-                    method: 'PUT',
-                    body: formData,
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                });
-                
-                if (!respuesta.ok) {
-                    const error = await respuesta.json();
-                    throw new Error(error.message || 'Error al actualizar empleado');
-                }
-                
-                mostrarMensaje('Empleado actualizado correctamente', 'exito');
-                setTimeout(function() {
-                    window.location.href = '../empleados.html';
-                }, 2000);
-                
-            } catch (error) {
-                mostrarMensaje(error.message);
-                console.error('Error al actualizar empleado:', error);
-            } finally {
-                mostrarCargando(false);
+
+    // Activar la cámara
+    tomarFotoBtn.addEventListener('click', async () => {
+        try {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
             }
-        });
-    }
+
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.display = 'block';
+            tomarFotoBtn.textContent = 'Capturar Foto';
+        } catch (error) {
+            alert('No se pudo acceder a la cámara');
+            console.error('Error al acceder a la cámara:', error);
+        }
+    });
+
+    // Capturar foto
+    video.addEventListener('click', () => {
+        if (stream) {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convertir la imagen a un archivo
+            canvas.toBlob((blob) => {
+                const file = new File([blob], 'foto.png', { type: 'image/png' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fotografiaInput.files = dataTransfer.files;
+
+                // Detener la cámara
+                stream.getTracks().forEach(track => track.stop());
+                video.style.display = 'none';
+                tomarFotoBtn.textContent = 'Tomar Foto';
+            }, 'image/png');
+        }
+    });
+
+    cancelarBtn.addEventListener('click', () => {
+        window.location.href = '../empleados.html';
+    });
+
+    // Enviar formulario
+    document.getElementById('empleadoForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+
+        
+        const formData = new FormData();
+        const fechaEgresoValue = document.getElementById('fecha_egreso').value;
+        formData.append('fecha_egreso', fechaEgresoValue === 'null' || fechaEgresoValue === '' ? '' : fechaEgresoValue);
+        formData.append('nombre', document.getElementById('nombre').value);
+        formData.append('puesto', document.getElementById('puesto').value);
+        formData.append('tipo_contrato', document.getElementById('tipo_contrato').value);
+        formData.append('sueldo_base', parseFloat(document.getElementById('sueldo_base').value));
+        // Cambio clave: Enviamos directamente 'SI' o 'NO'
+        formData.append('activo', document.getElementById('activo').value);
+        formData.append('fecha_contratacion', document.getElementById('fecha_contratacion').value);
+        formData.append('numero_identidad', document.getElementById('numero_identidad').value);
+        formData.append('huella', document.getElementById('huella').value || '');
+        formData.append('telefono', document.getElementById('telefono').value || '');
+        formData.append('domicilio', document.getElementById('domicilio').value || '');
+        formData.append('estado_civil', document.getElementById('estado_civil').value || '');
+        formData.append('sexo', document.getElementById('sexo').value || '');
+       // formData.append('fecha_egreso', document.getElementById('fecha_egreso').value || null);
+        formData.append('nivel_educativo', document.getElementById('nivel_educativo').value || '');
+        formData.append('nombre_emergencia', document.getElementById('nombre_emergencia').value || '');
+        formData.append('telefono_emergencia', document.getElementById('telefono_emergencia').value || '');
+        formData.append('lugar_nacimiento', document.getElementById('lugar_nacimiento').value || '');
+        formData.append('fecha_nacimiento', document.getElementById('fecha_nacimiento').value || '');
+        formData.append('tipo_contrato_empleo', document.getElementById('tipo_contrato_empleo').value || '');
+        formData.append('beneficiarios', document.getElementById('beneficiarios').value || '');
+        formData.append('nacionalidad', document.getElementById('nacionalidad').value || '');
     
-    // Manejar botón cancelar
-    const btnCancelar = document.getElementById('btnCancelar');
-    if (btnCancelar) {
-        btnCancelar.addEventListener('click', function() {
-            if (confirm('¿Está seguro que desea cancelar? Los cambios no guardados se perderán.')) {
+        // Manejar la fotografía
+        if (fotografiaInput.files[0]) {
+            formData.append('fotografia', fotografiaInput.files[0]);
+        }
+    
+        // Enviar los datos al backend
+        try {
+
+            const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`, {
+                method: 'PUT',
+                body: formData,
+            });
+    
+            if (response.ok) {
+                alert('Empleado actualizado correctamente');
                 window.location.href = '../empleados.html';
+            } else {
+                const errorData = await response.json();
+                alert(`Error al actualizar el empleado: ${errorData.message || 'Error desconocido'}`);
             }
-        });
-    }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al actualizar el empleado. Por favor, inténtalo de nuevo.');
+        }
+    });
 });
