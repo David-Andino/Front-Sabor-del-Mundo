@@ -132,8 +132,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Enviar formulario
     document.getElementById('empleadoForm').addEventListener('submit', async (event) => {
         event.preventDefault();
-    
+        
+
+        
         const formData = new FormData();
+        const fechaEgresoValue = document.getElementById('fecha_egreso').value;
+        formData.append('fecha_egreso', fechaEgresoValue === 'null' || fechaEgresoValue === '' ? '' : fechaEgresoValue);
         formData.append('nombre', document.getElementById('nombre').value);
         formData.append('puesto', document.getElementById('puesto').value);
         formData.append('tipo_contrato', document.getElementById('tipo_contrato').value);
@@ -147,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         formData.append('domicilio', document.getElementById('domicilio').value || '');
         formData.append('estado_civil', document.getElementById('estado_civil').value || '');
         formData.append('sexo', document.getElementById('sexo').value || '');
-        formData.append('fecha_egreso', document.getElementById('fecha_egreso').value || null);
+       // formData.append('fecha_egreso', document.getElementById('fecha_egreso').value || null);
         formData.append('nivel_educativo', document.getElementById('nivel_educativo').value || '');
         formData.append('nombre_emergencia', document.getElementById('nombre_emergencia').value || '');
         formData.append('telefono_emergencia', document.getElementById('telefono_emergencia').value || '');
