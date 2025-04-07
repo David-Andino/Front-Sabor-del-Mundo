@@ -1,33 +1,32 @@
-/**
- * Verifica la autenticación del usuario mediante el token almacenado
- */
 function verificarAutenticacion() {
     const token = localStorage.getItem('authToken');
 
     if (!token) {
-        window.location.href = '../../../login.html';
+        // Si no hay token, redirigir al login
+        window.location.href = '../../login.html';
         return;
     }
 
+    // Verificar el token con el backend
     fetch('https://loginbackend-production.up.railway.app/api/auth/verify-token', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': token, // Enviar el token en el encabezado
         },
     })
     .then(response => {
         if (!response.ok) {
-            localStorage.removeItem('authToken');
-            window.location.href = '../../../login.html';
+            // Si el token no es válido, redirigir al login
+            localStorage.removeItem('authToken'); // Eliminar el token inválido
+            window.location.href = '../../login.html';
         }
     })
     .catch(error => {
         console.error('Error al verificar el token:', error);
-        window.location.href = '../../../login.html';
+        window.location.href = '../../login.html';
     });
 }
 
-// Verificar autenticación al cargar la página
 verificarAutenticacion();
 
 document.addEventListener('DOMContentLoaded', async () => {
