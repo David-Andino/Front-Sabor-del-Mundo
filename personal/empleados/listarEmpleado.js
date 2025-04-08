@@ -247,11 +247,11 @@ async function generarPDF(id) {
         }
 
         // 5. Cargar y agregar foto del empleado (tamaño reducido)
-        const rutaBase = 'https://personal-backend-je2r.onrender.com/imagenesEmpleados/';
-        const nombreImagen = empleado.ruta_fotografia;
-        const urlImagen = nombreImagen ? `${rutaBase}${nombreImagen}` : `${rutaBase}predeterminado.png`;
+        const urlCompleta = empleado.foto ? empleado.foto : 'https://via.placeholder.com/150?text=Sin+Foto';
+     
+        //const urlImagen = nombreImagen ? `${rutaBase}${nombreImagen}` : `${rutaBase}predeterminado.png`;
         
-        const imgData = await getBase64Image(urlImagen);
+        const imgData = await getBase64Image(urlCompleta);
         if (imgData) {
             const imgX = (210 - config.imageSize) / 2;
             doc.addImage(imgData, "JPEG", imgX, 45, config.imageSize, config.imageSize);
@@ -394,10 +394,12 @@ function navegar(destino) {
             window.location.href = '../asistencia/dashboard.html';
             break;
         case 'nomina':
-            window.location.href = '../nomina/generarNomina.html';
+            alert("🛠️ Este apartado está en desarrollo. 🛠️");
+            window.location.href = '#';
             break;
         case 'derechos':
-            window.location.href = '../derechos/verDerechos.html';
+            alert("🛠️ Este apartado está en desarrollo. 🛠️");
+            window.location.href = '#';
             break;
         default:
             console.log('Destino no reconocido');
