@@ -131,7 +131,7 @@ video.addEventListener('click', () => {
         // Enviar los datos al backend
         try {
   
-            const response = await fetch('https://personal-backend-ggeb.onrender.com/api/empleados/crear', {
+            const response = await fetch('https://personal-backend-je2r.onrender.com/api/empleados/crear', {
                 method: 'POST',
                 body: formData,
             });

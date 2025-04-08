@@ -55,7 +55,7 @@ async function loadDashboardData() {
         showLoading();
         
         // Obtener datos del resumen diario
-        const resumenResponse = await fetch(`https://personal-backend-ggeb.onrender.com/api/asistencia/resumen/diario?fecha=${date}`);
+        const resumenResponse = await fetch(`https://personal-backend-je2r.onrender.com/api/asistencia/resumen/diario?fecha=${date}`);
         const resumenData = await resumenResponse.json();
         
         updateCards(resumenData);
@@ -109,7 +109,7 @@ function resetCards() {
 // Cargar últimos registros
 async function loadLastRegisters(date) {
     try {
-        const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/asistencia/fecha/${date}`);
+        const response = await fetch(`https://personal-backend-je2r.onrender.com/api/asistencia/fecha/${date}`);
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
         const data = await response.json();

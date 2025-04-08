@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
     
             // Enviar datos al servidor
-            const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/asistencia/registrar`, {
+            const response = await fetch(`https://personal-backend-je2r.onrender.com/api/asistencia/registrar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Primero obtener empleados sin salida
-            const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/asistencia/sin-salida/${fecha}`);
+            const response = await fetch(`https://personal-backend-je2r.onrender.com/api/asistencia/sin-salida/${fecha}`);
             const sinSalida = await response.json();
             
             if (sinSalida.length === 0) {
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Ejecutar cierre
-            const cierreResponse = await fetch(`https://personal-backend-ggeb.onrender.com/api/asistencia/cerrar-jornada`, {
+            const cierreResponse = await fetch(`https://personal-backend-je2r.onrender.com/api/asistencia/cerrar-jornada`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ fecha, horaCierre: hora })
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!fecha) {
                     throw new Error('Por favor seleccione una fecha');
                 }
-                url = `https://personal-backend-ggeb.onrender.com/api/asistencia/fecha/${fecha}`;
+                url = `https://personal-backend-je2r.onrender.com/api/asistencia/fecha/${fecha}`;
             } else if (searchType === 'empleado') {
                 const empleadoId = document.getElementById('empleadoSearchId').value.trim();
                 const fechaInicio = document.getElementById('fechaInicio').value;
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Por favor ingrese un ID de empleado');
                 }
                 
-                url = `https://personal-backend-ggeb.onrender.com/api/asistencia/empleado/${empleadoId}`;
+                url = `https://personal-backend-je2r.onrender.com/api/asistencia/empleado/${empleadoId}`;
                 params = {
                     fechaInicio: fechaInicio || undefined,
                     fechaFin: fechaFin || undefined
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!fecha) {
                     throw new Error('Por favor seleccione una fecha');
                 }
-                url = 'https://personal-backend-ggeb.onrender.com/api/asistencia/resumen/diario';
+                url = 'https://personal-backend-je2r.onrender.com/api/asistencia/resumen/diario';
                 params = { fecha };
             }
 

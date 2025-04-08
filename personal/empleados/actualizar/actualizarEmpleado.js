@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Obtener los datos del empleado
     try {
-        const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`);
+        const response = await fetch(`https://personal-backend-je2r.onrender.com/api/empleados/${empleadoId}`);
         if (!response.ok) throw new Error('No se pudo obtener el empleado');
         
         const data = await response.json();
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('nacionalidad').value = data.nacionalidad || '';
 
         // Mostrar la foto del empleado
-         const urlCompleta = data.foto ? data.foto : 'https://via.placeholder.com/150?text=Sin+Foto';
+         const urlCompleta = data.foto ? data.foto : 'https://personal-backend-je2r.onrender.com/150?text=Sin+Foto';
         document.getElementById('carnetFoto').src = urlCompleta
 
     } catch (error) {
@@ -165,7 +165,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     
-        console.log('FormData:', campos); // Verificar el contenido de FormData
         // Manejar la fotografía
         if (fotografiaInput.files[0]) {
             formData.append('fotografia', fotografiaInput.files[0]);
@@ -173,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Enviar los datos al backend
         try {
 
-            const response = await fetch(`https://personal-backend-ggeb.onrender.com/api/empleados/${empleadoId}`, {
+            const response = await fetch(`https://personal-backend-je2r.onrender.com/api/empleados/${empleadoId}`, {
                 method: 'PUT',
                 body: formData,
             });

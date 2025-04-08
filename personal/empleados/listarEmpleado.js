@@ -1,4 +1,4 @@
-const API_URL = 'https://personal-backend-ggeb.onrender.com/api/empleados';
+const API_URL = 'https://personal-backend-je2r.onrender.com/api/empleados';
 const empleadosTable = document.getElementById('empleadosTable').getElementsByTagName('tbody')[0];
 
 function verificarAutenticacion() {
@@ -247,7 +247,7 @@ async function generarPDF(id) {
         }
 
         // 5. Cargar y agregar foto del empleado (tamaño reducido)
-        const rutaBase = 'https://personal-backend-ggeb.onrender.com/imagenesEmpleados/';
+        const rutaBase = 'https://personal-backend-je2r.onrender.com/imagenesEmpleados/';
         const nombreImagen = empleado.ruta_fotografia;
         const urlImagen = nombreImagen ? `${rutaBase}${nombreImagen}` : `${rutaBase}predeterminado.png`;
         
