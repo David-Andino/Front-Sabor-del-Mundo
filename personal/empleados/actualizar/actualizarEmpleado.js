@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     
-        console.log('FormData:', formData); // Verificar el contenido de FormData
+        console.log('FormData:', campos); // Verificar el contenido de FormData
         // Manejar la fotografía
         if (fotografiaInput.files[0]) {
             formData.append('fotografia', fotografiaInput.files[0]);
