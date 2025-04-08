@@ -133,39 +133,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('empleadoForm').addEventListener('submit', async (event) => {
         event.preventDefault();
         
-
-        
         const formData = new FormData();
-        const fechaEgresoValue = document.getElementById('fecha_egreso').value;
-        formData.append('fecha_egreso', fechaEgresoValue === 'null' || fechaEgresoValue === '' ? '' : fechaEgresoValue);
-        formData.append('nombre', document.getElementById('nombre').value);
-        formData.append('puesto', document.getElementById('puesto').value);
-        formData.append('tipo_contrato', document.getElementById('tipo_contrato').value);
-        formData.append('sueldo_base', parseFloat(document.getElementById('sueldo_base').value));
-        // Cambio clave: Enviamos directamente 'SI' o 'NO'
-        formData.append('activo', document.getElementById('activo').value);
-        formData.append('fecha_contratacion', document.getElementById('fecha_contratacion').value);
-        formData.append('numero_identidad', document.getElementById('numero_identidad').value);
-        formData.append('huella', document.getElementById('huella').value || '');
-        formData.append('telefono', document.getElementById('telefono').value || '');
-        formData.append('domicilio', document.getElementById('domicilio').value || '');
-        formData.append('estado_civil', document.getElementById('estado_civil').value || '');
-        formData.append('sexo', document.getElementById('sexo').value || '');
-       // formData.append('fecha_egreso', document.getElementById('fecha_egreso').value || null);
-        formData.append('nivel_educativo', document.getElementById('nivel_educativo').value || '');
-        formData.append('nombre_emergencia', document.getElementById('nombre_emergencia').value || '');
-        formData.append('telefono_emergencia', document.getElementById('telefono_emergencia').value || '');
-        formData.append('lugar_nacimiento', document.getElementById('lugar_nacimiento').value || '');
-        formData.append('fecha_nacimiento', document.getElementById('fecha_nacimiento').value || '');
-        formData.append('tipo_contrato_empleo', document.getElementById('tipo_contrato_empleo').value || '');
-        formData.append('beneficiarios', document.getElementById('beneficiarios').value || '');
-        formData.append('nacionalidad', document.getElementById('nacionalidad').value || '');
+        const campos = {
+            nombre: document.getElementById('nombre').value,
+            puesto: document.getElementById('puesto').value,
+            tipo_contrato: document.getElementById('tipo_contrato').value,
+            sueldo_base: document.getElementById('sueldo_base').value,
+            activo: document.getElementById('activo').value,
+            fecha_contratacion: document.getElementById('fecha_contratacion').value,
+            numero_identidad: document.getElementById('numero_identidad').value,
+            huella: document.getElementById('huella').value || '',
+            telefono: document.getElementById('telefono').value,
+            domicilio: document.getElementById('domicilio').value,
+            estado_civil: document.getElementById('estado_civil').value,
+            sexo: document.getElementById('sexo').value,
+            fecha_egreso: document.getElementById('fecha_egreso').value || null,
+            nivel_educativo: document.getElementById('nivel_educativo').value,
+            nombre_emergencia: document.getElementById('nombre_emergencia').value,
+            telefono_emergencia: document.getElementById('telefono_emergencia').value,
+            lugar_nacimiento: document.getElementById('lugar_nacimiento').value,
+            fecha_nacimiento: document.getElementById('fecha_nacimiento').value,
+            tipo_contrato_empleo: document.getElementById('tipo_contrato_empleo').value,
+            beneficiarios: document.getElementById('beneficiarios').value || null,
+            nacionalidad: document.getElementById('nacionalidad').value
+        };
+    
+        // Agregar campos al FormData
+        Object.entries(campos).forEach(([key, value]) => {
+            if (value !== null && value !== undefined) {
+                formData.append(key, value);
+            }
+        });
     
         // Manejar la fotografía
         if (fotografiaInput.files[0]) {
             formData.append('fotografia', fotografiaInput.files[0]);
         }
-    
         // Enviar los datos al backend
         try {
 
